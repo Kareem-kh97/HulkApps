@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Task1</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link
+      href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Import JQuery -->
+    <script src="./js/jquery-3.6.1.min.js"></script>
+
+
+  </head>
+
+  <body>
+    <main>
+    </main>
+
+    <modals>
+      <!-- Modal -->
+      <div
+        id="login-modal"
+        class="modal fade"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="login-modal-label"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="login-modal-label">Login</h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <form id="login-form">
+              <div class="modal-body">
+                <div class="form" style="max-height: 90px">
+                  <label for="floatingInput">Email address</label>
+                  <input
+                    name="email"
+                    type="email"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="name@example.com"
+                    value="kareem@gmail.com"
+                    required
+                  />
+                </div>
+                <div class="form" style="max-height: 90px">
+                  <label for="floatingPassword">Password</label>
+                  <input
+                    name="password"
+                    type="password"
+                    class="form-control"
+                    id="floatingPassword"
+                    placeholder="Password"
+                    value="12345678"
+                    required
+                  />
+                </div>
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#signup-modal"
+                >
+                  Sign up
+                </a>
+              </div>
+              <div class="modal-footer">
+                <div
+                  id="login-modal-spinner"
+                  class="spinner-border"
+                  role="status"
+                  style="position: absolute; left: 50%; display: none"
+                >
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sign-up Modal -->
+      <div
+        id="signup-modal"
+        class="modal fade"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="signup-modal-label"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="signup-modal-label">Sign Up</h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <form id="signup-form">
+              <div class="modal-body">
+                <div class="form" style="max-height: 90px">
+                  <label for="signup-firstname">First Name</label>
+                  <input
+                    name="first_name"
+                    type="text"
+                    class="form-control"
+                    id="signup-firstname"
+                    placeholder="name@example.com"
+                    required
+                  />
+                </div>
+                <div class="form" style="max-height: 90px">
+                  <label for="signup-lastname">Last name</label>
+                  <input
+                    name="last_name"
+                    type="text"
+                    class="form-control"
+                    id="signup-lastname"
+                    placeholder="name@example.com"
+                    required
+                  />
+                </div>
+                <div class="form" style="max-height: 90px">
+                  <label for="signup-email">Email address</label>
+                  <input
+                    name="email"
+                    type="email"
+                    class="form-control"
+                    id="signup-email"
+                    placeholder="name@example.com"
+                    required
+                  />
+                </div>
+                <div class="form" style="max-height: 90px">
+                  <label for="signup-password">Password</label>
+                  <input
+                    name="password"
+                    type="password"
+                    class="form-control"
+                    id="signup-password"
+                    placeholder="Password"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <div
+                  id="signup-modal-spinner"
+                  class="spinner-border"
+                  role="status"
+                  style="position: absolute; left: 50%; display: none"
+                >
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </modals>
+
+    <import>
+      <!-- js folder -->
+      <script src="./js/bootstrap.bundle.min.js"></script>
+      <script src="./js/jquery.validate.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+      <!-- services folder -->
+      <script src="./services/User.js"></script>
+    </import>
+  </body>
+</html>
