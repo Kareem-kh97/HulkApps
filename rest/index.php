@@ -7,16 +7,33 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 require_once __DIR__.'/../vendor/autoload.php';
-require_once __DIR__.'/dao/UserDao.class.php';
+
+// require_once __DIR__.'/dao/UserDao.class.php';
+// require_once __DIR__.'/dao/MovieDao.class.php';
+
+
+
+require_once __DIR__.'/services/MovieService.class.php';
+require_once __DIR__.'/services/UserService.class.php';
+
 
 Flight::register('userDao', 'UserDao');
+// Flight::register('movieDao', 'MovieDao');
 
-phpinfo();
+Flight::register('userService', 'UserService');
+Flight::register('movieService', 'MovieService');
 
-Flight::map('error', function(Exception $ex){
-    // Handle error
-    Flight::json(['message' => $ex->getMessage()], 500);
+// phpinfo();
+
+Flight::map('error', function($ex){
+  // Handle error
+  if($user['id'] !== null) {
+      // Flight::json(['message' => $ex->getMessage()], 500);
+  } else {
+      Flight::json(['message' => 'An error occurred.'], 500);
+  }
 });
+
 
 /* utility function for reading query parameters from URL */
 Flight::map('query', function($name, $default_value = NULL){ //$default_value if parameter is not present in the query string
@@ -28,11 +45,12 @@ Flight::map('query', function($name, $default_value = NULL){ //$default_value if
 
 // middleware method for login
 Flight::route('/*', function(){
-  // return TRUE;
+  return TRUE;
   //perform JWT decode
   $path = Flight::request()->url;
-  if ($path == '/login' || $path == '/signup' || $path == '/docs.json') return TRUE; // exclude login route from middleware
-
+  // if($path == '/hulkApps/rest/home') Flight::json(["message" => "path is: ".$path], 403);
+  if ($path == '/login' || $path == '/signup' || $path == '/docs.json' || $path == '/hulkApps/rest/home' ) return TRUE; // exclude login route from middleware
+  
   $headers = getallheaders();
   if (@!$headers['Authorization']){
     Flight::json(["message" => "Authorization is missing"], 403);
@@ -56,9 +74,9 @@ Flight::route('GET /docs.json', function(){
   echo $openapi->toJson();
 });
 
+
 require_once __DIR__.'/routes/MovieRoutes.php';
 require_once __DIR__.'/routes/UserRoutes.php';
-
 
 Flight::start();
 ?>

@@ -10,7 +10,6 @@ class UserDao extends BaseDao{
     parent::__construct("users");
   }
 
-  // it is going to be helpfull when we want to implement the registration and login parts
   public function get_user_by_email($email){
     return $this->query_unique("SELECT * FROM users WHERE email = :email", ['email' => $email]);
   }

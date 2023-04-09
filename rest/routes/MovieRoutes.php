@@ -1,5 +1,29 @@
 <?php
 
+/**
+ * @OA\Get(
+ *     path="/movies",
+ *     summary="Retrieve all movies from the movies table",
+ *     description="This endpoint returns a list of all movies from the movies table.",
+ *     tags={"movie"},
+ *     @OA\Response(
+ *         response=200,
+ *         description="List of movies",
+ *         @OA\JsonContent(
+ *             type="array",
+ *             @OA\Items(ref="#/components/schemas/Movie")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Not found"
+ *     ),
+ *     security={
+ *         {"jwt": {}}
+ *     }
+ * )
+ */
+
 Flight::route('GET /movies', function(){
 
     $movie = Flight::request()->query->getData();

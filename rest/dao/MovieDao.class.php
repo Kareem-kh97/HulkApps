@@ -22,7 +22,7 @@ class MovieDao extends BaseDao {
       return $movies;
     }
 
-    $stmt = $this->conn->prepare("SELECT * FROM movies");
+    $stmt = $this->prepare("SELECT * FROM movies");
     $stmt->execute();
     $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
@@ -53,9 +53,9 @@ class MovieDao extends BaseDao {
     $query = substr($query, 0, -2);
     $query .= ")";
 
-    $stmt= $this->conn->prepare($query);
+    $stmt= $this->prepare($query);
     $stmt->execute($entity); // sql injection prevention
-    $entity['id'] = $this->conn->lastInsertId();
+    $entity['id'] = $this->lastInsertId();
     // return $entity;
     return $this->add($entity);
   }
@@ -68,7 +68,7 @@ class MovieDao extends BaseDao {
     $query = substr($query, 0, -2);
     $query .= " WHERE id = :id";
 
-    $stmt= $this->conn->prepare($query);
+    $stmt= $this->prepare($query);
     $entity['id'] = $id;
     $stmt->execute($entity);
     // return $entity;
@@ -77,7 +77,7 @@ class MovieDao extends BaseDao {
 
   public function delete_movie($id) {
 
-    $stmt = $this->conn->prepare("DELETE FROM movies WHERE id=:id");
+    $stmt = $this->prepare("DELETE FROM movies WHERE id=:id");
     $stmt->bindParam(':id', $id); // SQL injection prevention
     $stmt->execute();
     $this->delete($id);
@@ -90,7 +90,7 @@ class MovieDao extends BaseDao {
   //this function is for a user to follow a movie
   public function follow_movie($user_id, $movie_id) {
     $query = "INSERT INTO user_movie_follows (user_id, movie_id) VALUES (:user_id, :movie_id)";
-    $stmt = $this->conn->prepare($query);
+    $stmt = $this->prepare($query);
     $stmt->bindParam(':user_id', $user_id);
     $stmt->bindParam(':movie_id', $movie_id);
     $stmt->execute();
@@ -101,7 +101,7 @@ class MovieDao extends BaseDao {
  */
 public function get_followed_movies_by_user_id($user_id) {
     $query = "SELECT * FROM user_movie_follows JOIN movies ON user_movie_follows.movie_id = movies.id WHERE user_id = :user_id";
-    $stmt = $this->conn->prepare($query);
+    $stmt = $this->prepare($query);
     $stmt->bindParam(':user_id', $user_id);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);

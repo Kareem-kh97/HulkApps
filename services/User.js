@@ -2,6 +2,7 @@ const UserService = {
     init: function() {
       
       UserService.check_token();
+      
   
       // validate the login form inside the login modal
       $('#login-form').validate({
@@ -53,16 +54,7 @@ const UserService = {
       });
     },
     
-    check_token: function(){
-      var token = localStorage.getItem("token");
-      if (!token){
-        // show login modal when page loads if there is no token
-        $('#login-modal').modal('show');      
-      }
-      else{
-        ContactService.init();
-      }
-    },
+  
   
     login: function(entity){    
       $.ajax({
@@ -90,7 +82,9 @@ const UserService = {
         },
         
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-          toastr.error(XMLHttpRequest.responseJSON.message);
+          // toastr.error(XMLHttpRequest.responseJSON.message);
+          console.log(XMLHttpRequest);
+          toastr.error(errorThrown);
           // hide the modal spinner
           $('#login-modal-spinner').hide();
           
@@ -98,15 +92,13 @@ const UserService = {
       });
     },
   
-    logout: function(){
-      localStorage.clear();
-      location.reload();
-    },
-  
+
   };
   
   // Call the init function when the page loads
   window.addEventListener('load', () => {
     UserService.init();
   });
-  
+  //our modal view controller/design patttern that I implemented
+  // this is the controller that wil be called by the view file  wich is "index.html"
+  //this controller is going to do the action, and our modal in between is called json data from forms
